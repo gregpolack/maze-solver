@@ -61,21 +61,30 @@ class Cell:
         self._x2 = bot_right.x
         self._y2 = bot_right.y
         
-        if self.has_left_wall:
-            left_wall = Line(Point(self._x1, self._y1), Point(self._x1, self._y2))
+        left_wall = Line(Point(self._x1, self._y1), Point(self._x1, self._y2))
+        right_wall = Line(Point(self._x2, self._y1), Point(self._x2, self._y2))
+        top_wall = Line(Point(self._x1, self._y1), Point(self._x2, self._y1))
+        bot_wall = Line(Point(self._x1, self._y2), Point(self._x2, self._y2))
+
+        if self.has_left_wall:   
             self._win.draw_line(left_wall)
+        else:
+            self._win.draw_line(left_wall, fill_color='white')
         
         if self.has_right_wall:
-            right_wall = Line(Point(self._x2, self._y1), Point(self._x2, self._y2))
             self._win.draw_line(right_wall)
+        else:
+            self._win.draw_line(right_wall, fill_color='white')
 
         if self.has_top_wall:
-            top_wall = Line(Point(self._x1, self._y1), Point(self._x2, self._y1))
             self._win.draw_line(top_wall)
+        else:
+            self._win.draw_line(top_wall, fill_color='white')
 
         if self.has_bot_wall:
-            bot_wall = Line(Point(self._x1, self._y2), Point(self._x2, self._y2))
             self._win.draw_line(bot_wall)
+        else:
+            self._win.draw_line(bot_wall, fill_color='white')
     
     def draw_move(self, to_cell, undo=False):
         x_center = (self._x1 + self._x2)/2
