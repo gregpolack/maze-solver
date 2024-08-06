@@ -40,7 +40,7 @@ class Maze:
         bot_right = Point((self.x1 + self.cell_size_x) + (i * self.cell_size_x),
                            self.y1 + self.cell_size_y + (j * self.cell_size_y))
 
-        cell = Cell(self.win)
+        cell = self._cells[i][j]
         cell.draw(top_left, bot_right)
 
         self._animate()
@@ -51,3 +51,15 @@ class Maze:
         
         self.win.redraw()
         time.sleep(0.05)
+
+    def _break_entrance_and_exit(self):
+        first_col = first_row = 0
+        entrance = self._cells[first_col][first_row]
+        entrance.has_top_wall = False
+        self._draw_cell(0, 0)
+
+        last_col = len(self._cells) - 1
+        last_row = len(self._cells[-1]) - 1
+        exit = self._cells[last_col][last_row]
+        exit.has_bot_wall = False
+        self._draw_cell(last_col, last_row)
