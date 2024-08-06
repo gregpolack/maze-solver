@@ -5,7 +5,7 @@ class Maze:
     def __init__(self, x1, y1, 
                 num_rows, num_cols, 
                 cell_size_x, cell_size_y, 
-                win):
+                win=None):
         self.x1 = x1
         self.y1 = y1
         self.num_rows = num_rows
@@ -32,7 +32,9 @@ class Maze:
                 self._draw_cell(i, j)
 
     def _draw_cell(self, i, j):
-
+        if self.win is None:
+            return
+        
         top_left = Point(self.x1 + (i * self.cell_size_x), 
                          self.y1 + (j * self.cell_size_y))
         bot_right = Point((self.x1 + self.cell_size_x) + (i * self.cell_size_x),
@@ -44,5 +46,8 @@ class Maze:
         self._animate()
     
     def _animate(self):
+        if self.win is None:
+            return
+        
         self.win.redraw()
         time.sleep(0.05)
