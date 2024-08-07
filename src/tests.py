@@ -57,6 +57,29 @@ class Tests(unittest.TestCase):
             m1._cells[-1][-1].has_bot_wall,
             False
         )
+    
+    def test_break_walls_r(self):
+        num_cols = 10
+        num_rows = 10
 
+        m1 = Maze(50, 50, num_rows, num_cols, 50, 50)
+        m1._break_entrance_and_exit()
+        
+        self.assertIsNone(m1._break_walls_r(0, 0))
+
+    def test_reset_cells_visited(self):
+        
+        num_cols = 5
+        num_rows = 5
+
+        m1 = Maze(50, 50, num_rows, num_cols, 50, 50)
+        m1._break_entrance_and_exit()
+        m1._break_walls_r(0, 0)
+        m1._reset_cells_visited()
+
+        for col in m1._cells:
+            for cell in col:
+                self.assertFalse(cell.visited)
+                
 if __name__ == "__main__":
     unittest.main()

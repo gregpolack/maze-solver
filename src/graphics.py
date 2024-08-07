@@ -54,6 +54,7 @@ class Cell:
         self._y2 = None
 
         self._win = win
+        self.visited = False
 
     def draw(self, top_left, bot_right):
         self._x1 = top_left.x
